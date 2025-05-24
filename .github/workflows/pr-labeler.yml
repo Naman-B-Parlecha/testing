@@ -1,38 +1,23 @@
-name: PR Labeler
-
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-
+name: size-label
+on: pull_request_target
 jobs:
-  size-labeler:
+  size-label:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Add size labels
-        uses: pascalgn/size-label-action@v0.5.5
+      - name: size-label
+        uses: "pascalgn/size-label-action@v0.5.5"
+        env:
+          LABEL_TOKEN: "${{ secrets.LABEL_TOKEN }}"
         with:
-          github-token: ${{ secrets.LABEL_TOKEN }}
           sizes: >
             {
-              "XS": 10,
-              "S": 30,
-              "MD": 100,
-              "L": 500,
-              "XL": 1000
+              "0": "XS",
+              "20": "S",
+              "50": "M",
+              "200": "L",
+              "800": "XL",
+              "2000": "XXL"
             }
-          prefix: "size/"
-
-  file-labeler:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Add file-based labels
-        uses: actions/labeler@v5
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          configuration-path: .github/labeler.yml
