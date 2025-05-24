@@ -16,17 +16,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          configuration: |
-            labels:
-              - size: XS
-                lines: 0
-              - size: S
-                lines: 20
-              - size: M
-                lines: 50
-              - size: L
-                lines: 200
-              - size: XL
-                lines: 800
-              - size: XXL
-                lines: 2000
+          sizes: >
+            {
+              "0": "XS",
+              "20": "S",
+              "50": "M",
+              "200": "L",
+              "800": "XL",
+              "2000": "XXL"
+            }
