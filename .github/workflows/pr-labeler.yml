@@ -5,6 +5,19 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  file-labeler:
+    needs: size-label
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add file-based labels
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
+          
   size-label:
     permissions:
       contents: read
@@ -25,16 +38,3 @@ jobs:
               "800": "XL",
               "2000": "XXL"
             }
-
-  file-labeler:
-    needs: size-label
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Add file-based labels
-        uses: actions/labeler@v5
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          configuration-path: .github/labeler.yml
