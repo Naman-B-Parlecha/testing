@@ -1,0 +1,14 @@
+docs:
+  - '**/*.md'
+
+frontend:
+  - frontend/**/*
+  - '**/*.js'
+  - '**/*.ts'
+  - '**/*.css'
+  - '**/*.html'
+
+backend:
+  - backend/**/*
+  - '**/*.go'
+  - '**/*.py'
