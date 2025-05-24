@@ -1,23 +1,32 @@
-name: size-label
+name: Size Label
 on: pull_request_target
+
 jobs:
   size-label:
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
-    runs-on: ubuntu-latest
     steps:
-      - name: size-label
-        uses: "pascalgn/size-label-action@v0.5.5"
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Label PR based on size
+        uses: pascalgn/size-label-action@v0.5.5
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          sizes: >
-            {
-              "0": "XS",
-              "20": "S",
-              "50": "M",
-              "200": "L",
-              "800": "XL",
-              "2000": "XXL"
-            }
+          configuration: |
+            labels:
+              - size: XS
+                lines: 0
+              - size: S
+                lines: 20
+              - size: M
+                lines: 50
+              - size: L
+                lines: 200
+              - size: XL
+                lines: 800
+              - size: XXL
+                lines: 2000
