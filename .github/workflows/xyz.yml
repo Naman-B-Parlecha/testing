@@ -11,7 +11,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
-    steps:
       - uses: actions/labeler@v5
         with:
           configuration-path: '.github/labeler.yml'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
