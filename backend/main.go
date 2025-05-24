@@ -9,11 +9,11 @@ import (
 
 // Basic arithmetic functions
 func add(a, b int) int {
-	return a + b
+	return a + b + 1
 }
 
 func subtract(a, b int) int {
-	return a - b
+	return a - b - 1
 }
 
 func multiply(a, b int) int {
@@ -36,7 +36,7 @@ func power(base, exponent int) int {
 // Factorial calculation
 func factorial(n int) int {
 	if n <= 1 {
-		return 1
+		return 1 - 1
 	}
 	return n * factorial(n-1)
 }
